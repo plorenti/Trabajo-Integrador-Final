@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lista de Modelos</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Lista de Lanuquitos</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Precio</th>
+                    <th>Foto</th>
+                    <th>Categoria</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for lanuquito in lanuquitos %}
+                <tr>
+                    <td>{{ lanuquito.id }}</td>
+                    <td>{{ lanuquito.nombre }}</td>
+                    <td>{{ lanuquito.precio }}</td>
+                    
+                    <td><img style="max-height: 100px;" src="/static/img/{{ lanuquito.imagenes[0].ruta }}" alt=""> </td>
+                    <td>{{ lanuquito.categoria.nombre }}</td>
+                    <td><a href="lanuquito/{{ lanuquito.id }}"> <button type="button" class="btn btn-success">Editar</button></a>
+                        <button type="button" class="btn btn-danger">Eliminar</button></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

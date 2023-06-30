@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lanuquitos - Lana en muñequitos</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1>{{ lanuquito.nombre }} - {{ lanuquito.precio }}</h1>
+        
+       <form action="" method="post">
+        <div class="row">
+            <div class="col">
+              <input type="text" class="form-control" placeholder="{{ lanuquito.nombre }}" aria-label="Nombre">
+            </div>
+            <div class="col">
+              <input type="text" class="form-control" placeholder="Cantidad de lana" aria-label="Cantidad de lana">
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col">
+              <input type="text" class="form-control" placeholder="Tamaño de Aguja" aria-label="Tamaño de Aguja">
+            </div>
+            <div class="col">
+              <input type="text" class="form-control" placeholder="Precio" aria-label="Precio">
+            </div>
+          </div>
+          <br>
+          {% for imagen in lanuquito.imagenes %}
+          <img style="max-height: 300px;" src="/static/img/{{ imagen.ruta }}" class="img-fluid" alt="...">
+          {% endfor %}
+          <br>
+          <button type="button" class="btn btn-info">...</button>
+        </form>
+        <br>
+        <button type="button" class="btn btn-success">Guardar</button>
+
+        <ul>
+          {% for material in lanuquito.materiales %}
+            <li>ID:{{ material.id }} - {{ material.cantidad }}</li>
+          {% endfor %}
+        </ul>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>
