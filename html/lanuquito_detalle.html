@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Portal de Productos</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        .image-item {
+            display: inline-block;
+            margin-right: 10px;
+            text-align: center;
+        }
+
+        .image-item img {
+            max-width: 250px;
+            max-height: 300px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand navbar-dark bg-dark">
+        <a class="navbar-brand" href="index.html">Mi Sitio</a>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="index.html">Inicio</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="materiales.html">Materiales</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Contacto</a>
+            </li>
+        </ul>
+    </nav>
+    <div class="container mt-4">
+        <h1>Detalle de Producto</h1>
+        <form>
+            <div class="form-group">
+                <label for="nombre">Nombre</label>
+                <input type="text" class="form-control" id="nombre" name="nombre">
+            </div>
+            <div class="form-group">
+                <label for="categoria">Categoría</label>
+                <select class="form-control" id="categoria" name="categoria">
+                    <option value="categoria1">Categoría 1</option>
+                    <option value="categoria2">Categoría 2</option>
+                    <option value="categoria3">Categoría 3</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="precio">Precio</label>
+                <input type="number" class="form-control" id="precio" name="precio">
+            </div>
+            <div class="form-group">
+                <label for="imagenes">Imágenes</label>
+                <ul id="imagenes" class="list-unstyled">
+                    <li class="image-item">
+                        <img src="img/fotos/Buho.jpg">
+                        <div class="mt-2">
+                            <button type="button" class="btn btn-sm btn-primary">Modificar</button>
+                        </div>
+                        <div class="mt-2">
+                            <button type="button" class="btn btn-sm btn-danger">Eliminar</button>
+                        </div>
+                    </li>
+                    <li class="image-item">
+                        <img src="img/fotos/Oveja.jpg">
+                        <div class="mt-2">
+                            <button type="button" class="btn btn-sm btn-primary">Modificar</button>
+                        </div>
+                        <div class="mt-2">
+                            <button type="button" class="btn btn-sm btn-danger">Eliminar</button>
+                        </div>
+                    </li>
+                    <!-- Puedes agregar más elementos <li> según sea necesario -->
+                </ul>
+                <button type="button" class="btn btn-primary mt-2" id="agregar-imagen">Agregar Imagen</button>
+            </div>
+            <div class="form-group">
+                <h2>Materiales Necesarios</h2>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Material</th>
+                            <th>Cantidad</th>
+                            <th>Precio</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Material 1</td>
+                            <td>10</td>
+                            <td>$100</td>
+                            <td>
+                                <button type="button" class="btn btn-sm btn-primary">Editar</button>
+                                <button type="button" class="btn btn-sm btn-danger">Eliminar</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Material 2</td>
+                            <td>5</td>
+                            <td>$50</td>
+                            <td>
+                                <button type="button" class="btn btn-sm btn-primary">Editar</button>
+                                <button type="button" class="btn btn-sm btn-danger">Eliminar</button>
+                            </td>
+                        </tr>
+                        <!-- Puedes agregar más filas según sea necesario -->
+                    </tbody>
+                </table>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#agregar-material-modal">Agregar Material</button>
+            </div>
+            <button type="submit" class="btn btn-primary">Guardar</button>
+        </form>
+    </div>
+
+    <!-- Modal Agregar Material -->
+    <div class="modal fade" id="agregar-material-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Agregar Material</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="material">Material</label>
+                            <select class="form-control" id="material" name="material">
+                                <option value="material1">Material 1</option>
+                                <option value="material2">Material 2</option>
+                                <option value="material3">Material 3</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="cantidad">Cantidad</label>
+                            <input type="number" class="form-control" id="cantidad" name="cantidad">
+                        </div>
+                        <div class="form-group">
+                            <label for="precio-material">Precio</label>
+                            <input type="number" class="form-control" id="precio-material" name="precio-material">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary">Guardar</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#agregar-imagen').click(function() {
+                var html = '<li><input type="file" name="imagen"></li>';
+                $('#imagenes').append(html);
+            });
+        });
+    </script>
+</body>
+</html>
