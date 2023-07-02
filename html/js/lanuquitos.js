@@ -15,6 +15,7 @@ createApp({
             precio:0,
             categoria:0,
             id_categoria:0,
+            nuevaCategoria:"",
         };
 
     },
@@ -50,7 +51,7 @@ createApp({
               precio: this.precio,
             }
             //Configurar fetch
-            var opciones = {
+            let opciones = {
               body: JSON.stringify(lanuquito), // Convertir el objeto a una cadena JSON
               method: "POST", // Establecer el método HTTP como POST
               headers: { "Content-Type": "application/json" },
@@ -69,8 +70,35 @@ createApp({
               console.error(err);
               alert("Error al Grabar.");
             });
-          }
-
+            
+          },
+          agregarCategoria(){
+            //Crear objeto y capturar datos
+            let categoria ={
+              nombre : this.nuevaCategoria,
+            }
+            //Configurar fetch
+            let opciones = {
+              body: JSON.stringify(categoria), // Convertir el objeto a una cadena JSON
+              method: "POST", // Establecer el método HTTP como POST
+              headers: { "Content-Type": "application/json" },
+              redirect: "follow",
+            };  
+            //debug
+            //console.log(categoria)  
+            //console.log(this.nuevaCategoria)        
+            //Ejecutar
+            fetch(this.url_categorias, opciones)
+            .then(() =>{
+              alert("Categoria Agregada!");
+              this.fetchData(this.url,this.url_categorias);
+              $('#agregarCategoriaModal').modal('hide');
+            })
+            .catch((err) => {
+              console.error(err);
+              alert("Error al Grabar.");
+            });
+          },
     },
     created() {
         this.fetchData(this.url,this.url_categorias);
