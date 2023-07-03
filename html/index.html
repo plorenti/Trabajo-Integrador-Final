@@ -50,7 +50,7 @@
                     </thead>
                     <tbody>
                         <tr v-for="lanuquito in lanuquitos">
-                            <td> <a href="lanuquito.html">{{lanuquito.nombre}}</a></td>
+                            <td> <a :href="'lanuquito.html?id='+ lanuquito.id">{{lanuquito.nombre}}</a></td>
                             <td>{{lanuquito.categoria.nombre}}</td>
 
                             <td><img :src="'img/fotos/'+ (lanuquito.imagenes[0]?.ruta || 'no_picture.png')" alt="Foto del producto"></td>

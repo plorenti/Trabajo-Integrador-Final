@@ -21,7 +21,11 @@ createApp({
             nuevoMaterialCantidad:0,
             nuevoMaterialPrecio:0,
             lista_nuevosMateriales:[],
-            catSel:0,
+            id_categoria_seleccionada:0,
+            categorias_selecionada:null,
+            guardadoOK:false,
+            materialGuardadoOK:false,
+           
 
         };
     },
@@ -47,6 +51,7 @@ createApp({
                .then((response) => response.json())
                .then((data) => {
                  this.categorias = data;
+                
                })
                .catch((err) => {
                  console.error(err);
@@ -57,11 +62,14 @@ createApp({
                .then((response) => response.json())
                .then((data) => {
                  this.materiales_todos = data;
+                this.categorias_selecionada=this.getCategoriaSeleccionada();
+                
                })
                .catch((err) => {
                  console.error(err);
                  this.error = true;
                });
+             
             },
             agregarMaterialLanuquito(){
                 let material = {
@@ -73,6 +81,8 @@ createApp({
                  }
                  this.materialesLanuquitos.push(material)
                  this.lista_nuevosMateriales.push(material)
+
+                 $('#agregar-material-modal').modal('hide');
             },
             agregarMaterial(material){
              console.log(this.nuevoMaterial)
@@ -93,7 +103,7 @@ createApp({
               //Ejecutar
               fetch(this.url_materialLanuquito, opciones)
               .then(() =>{
-                alert("Material Agregado!");
+                this.materialGuardadoOK = true;
                 this.fetchData(this.url,this.url_categorias);
                 $('#agregar-material-modal').modal('hide');
               })
@@ -104,17 +114,66 @@ createApp({
 
 
             },
-            eliminarMaterial(){
-                
+            eliminarMaterial(id_material){
+                console.log(id_material)
+
+                var opciones ={
+                    method:"DELETE",
+                }
+                fetch(this.url_materialLanuquito+"/"+id_material, opciones)
+                .then(()=>{
+                    location.reload()
+                });
             },
             actualizar(){
-                console.log(this.lista_nuevosMateriales)
+               // console.log(this.lista_nuevosMateriales)
                 this.lista_nuevosMateriales.forEach(material => {
                     console.log(material)
                     this.agregarMaterial(material);
+                 
                 });
+
+             
+                   //ACA CODIGO PUT LANUQUITO
+                   let lanuquito_editado ={
+                    nombre :this.lanuquito.nombre,
+                    id_categoria: this.id_categoria_seleccionada,
+                    precio:this.lanuquito.precio,
+                }
+                let opciones = {
+                    body: JSON.stringify(lanuquito_editado), // Convertir el objeto a una cadena JSON
+                    method: "PUT", // Establecer el método HTTP como POST
+                    headers: { "Content-Type": "application/json" },
+                    redirect: "follow",
+                  }; 
+                                    //Ejecuto el fetch de POST
+                  fetch(this.url, opciones)
+                  .then(()=> {
+                    this.guardadoOK=true;
+
+                  })
+                  .catch((err) => {
+                    console.error(err);
+                    alert("Error al Grabar.");
+                  });
+
+            },
+            getCategoriaSeleccionada(){
+                var id_categoriaSel=0;
+                this.categorias.forEach(cat=>{
+                    if(cat.nombre==this.lanuquito.categoria.nombre){
+                        id_categoriaSel=cat.id;
+                    }
+                });
+                return id_categoriaSel;
             }
-          },
+        },
+        watch:{
+          categorias_selecionada(newVal){
+            this.id_categoria_seleccionada=newVal;
+              
+          }
+          },        
   created() {
 
     this.fetchData(this.url, this.url_categorias,this.url_materiales);
