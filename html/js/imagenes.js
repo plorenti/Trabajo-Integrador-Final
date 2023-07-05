@@ -3,51 +3,42 @@ const { createApp } = Vue;
 createApp({
     data(){
         return {
-            lanuquitos: [],
-            categorias:[],
-            url:"https://plorenti.pythonanywhere.com/lanuquitos",
-            url_categorias:"https://plorenti.pythonanywhere.com/categorias",
+            imagenes: [],
+            url:"https://plorenti.pythonanywhere.com/imagenes",
             error:false,
             cargando:true,
             // Atributos
             id:0,
-            nombre:"",
-            precio:0,
-            categoria:0,
-            id_categoria:0,
-            nuevaCategoria:"",
+            id_lanuquito:0,
+            ruta:"",
             buscar:"",
-            id_lanuquito_eliminar:0,
+            id_imagen_eliminar:0,
         };
 
     },
     methods: {
-        fetchData(url,url_categorias) {
+        fetchData(url) {
             fetch(url)
               .then((response) => response.json())
               .then((data) => {
                
-                this.lanuquitos = data;
-                this.cargando = false;
-              })
-              .catch((err) => {
-                console.error(err);
-                this.error = true;
-              });
-              //CARGO CATEGORIAS
-              fetch(url_categorias)
-              .then((response) => response.json())
-              .then((data) => {
-                this.categorias = data;
+                this.imagenes = data;
+
               })
               .catch((err) => {
                 console.error(err);
                 this.error = true;
               });
           },
-          set_id_lanuquito_eliminar(id){
-            this.id_lanuquito_eliminar=id;
+          modalEliminar(id){
+            this.id_imagen_eliminar=id;
+            $('#eliminarImagenModal').modal('show');
+            console.log(id)
           },
+          openDeleteModal() {
+            this.selectedImageId = imageId;
+            
+        },
           eliminarLanuquito(){
             
             var opciones ={
