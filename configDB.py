@@ -1,7 +1,7 @@
 
 #Datos para la conexion
 usuario = "root"
-password = "str50103"
+password = "password"
 host = "localhost"
 db = "lanuquitos"
 
